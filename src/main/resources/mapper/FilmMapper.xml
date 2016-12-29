@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ts.exam.dao.IFilmDao">
+
+    <!--单条增加film-->
+    <insert id="addOneFilm" parameterType="com.ts.exam.entity.Film" useGeneratedKeys="true" keyProperty="filmId">
+        insert into film
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            title,
+            <if test="description != null and !&quot;&quot;.equals(description.trim())">
+                description,
+            </if>
+            <if test="languageId != null and !&quot;&quot;.equals(languageId)">
+                language_id,
+            </if>
+        </trim>
+        <trim prefix="value(" suffix=")" suffixOverrides=",">
+            #{title},
+            <if test="description != null and !&quot;&quot;.equals(description.trim())">
+                #{description},
+            </if>
+            <if test="languageId != null and !&quot;&quot;.equals(languageId)">
+                #{languageId},
+            </if>
+        </trim>
+    </insert>
+</mapper>
